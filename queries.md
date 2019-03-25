@@ -22,7 +22,7 @@ select \* from Suppliers where Length(SupplierName) > 20;
 
 ## find all customers that include the word "market" in the name. Should return 4 records.
 
-select \* from Customers where customerName LIKE '%market%';
+select \* from Customers where customerName like '%market%';
 
 ## add a customer record for _"The Shire"_, the contact name is _"Bilbo Baggins"_ the address is _"1 Hobbit-Hole"_ in _"Bag End"_, postal code _"111"_ and the country is _"Middle Earth"_.
 
@@ -31,25 +31,25 @@ values ("The Shire", "Bilbo Baggins", "1 Hobbit-Hole", "Bag End", "111" , "Middl
 
 ## update _Bilbo Baggins_ record so that the postal code changes to _"11122"_.
 
-UPDATE customers SET postalcode = "11122" where customerId = 92
+update customers set postalcode = "11122" where customerId = 92
 
 ## list orders grouped by customer showing the number of orders per customer. _Rattlesnake Canyon Grocery_ should have 7 orders.
 
-select c.customerName, count(o.orderId) AS "Num of Orders" from orders o
-inner join customers c on o.customerId = c.customerId
-group by c.customerName
-order by c.customerName
+select c.customername, count(o.orderId) as "Num of Orders" from orders o
+inner join customers c on o.customerId = c.customerid
+group by c.customername
+order by c.customername
 
 ## list customers names and the number of orders per customer. Sort the list by number of orders in descending order. _Ernst Handel_ should be at the top with 10 orders followed by _QUICK-Stop_, _Rattlesnake Canyon Grocery_ and _Wartian Herkku_ with 7 orders each.
 
-select c.customername, count(o.orderid) AS "Num of Orders" from orders o
+select c.customername, count(o.orderid) as "Num of Orders" from orders o
 inner join customers c on o.customerid = c.customerid
 group by c.customername
 order by count(o.orderid) desc
 
 ## list orders grouped by customer's city showing number of orders per city. Returns 58 Records with _Aachen_ showing 2 orders and _Albuquerque_ showing 7 orders.
 
-select c.city, count(o.orderId) AS "Num of Orders" from orders o
+select c.city, count(o.orderId) as "Num of Orders" from orders o
 inner join customers c on o.customerId = c.customerId
 group by c.city
 
